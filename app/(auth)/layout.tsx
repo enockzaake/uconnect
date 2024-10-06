@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Universities Connect",
-  description: "Find your dream university abroad.",
+  description: "Authentication",
 };
 
 export default function RootLayout({
@@ -14,7 +13,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="">{children}</body>
+      <body className="">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
