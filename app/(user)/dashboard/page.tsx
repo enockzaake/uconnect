@@ -1,9 +1,14 @@
-"use client";
+// "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Clock, Menu, XCircle } from "lucide-react";
 import { useSideBar } from "@/store";
+import { getUserChosenPrograms } from "@/actions/user";
+import {
+  RemoveChosenProgramButton,
+  SubmitApplicationButton,
+} from "@/components/ActionBUttons";
 
 // Mock data
 const applicant = {
@@ -62,12 +67,16 @@ const StatusIcon = ({ status }: { status: string }) => {
   }
 };
 
-export default function Dashboard() {
-  const { toggleSideBar } = useSideBar();
+export default async function Dashboard() {
+  // const { toggleSideBar } = useSideBar();
+
+  const { chosen_programs, error } = await getUserChosenPrograms();
+  if (error) return <div className="">{error}</div>;
 
   return (
     <main className="flex-1 p-6 overflow-auto">
-      <Button className="md:hidden mb-4" onClick={toggleSideBar}>
+      <Button className="md:hidden mb-4">
+        {/* onClick={toggleSideBar} */}
         <Menu />
       </Button>
 
@@ -96,9 +105,20 @@ export default function Dashboard() {
             >
               {applicant.overallStatus}
             </Badge>
+            <SubmitApplicationButton />
           </div>
         </CardContent>
       </Card>
+
+      {chosen_programs?.map((program, index: number) => (
+        <div key={index} className="flex items-center justify-between max-w-lg">
+          {index + 1}
+          {"."}
+          {/* @ts-ignore */}
+          {program.programs.name}
+          <RemoveChosenProgramButton programID={program.id!} />
+        </div>
+      ))}
 
       <h3 className="text-lg font-semibold mb-4">Selected Programs</h3>
       <div className="space-y-4">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header";
+import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Universities Connect",
@@ -13,8 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="">{children}</body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang="en">
+        <Toaster position="top-center" richColors />
+        <body className="">{children}</body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }

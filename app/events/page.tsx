@@ -117,9 +117,9 @@ export default function SearchPage() {
               : "space-y-4"
           }
         >
-          {results.map((result) => (
+          {results.map((result, index) => (
             <div
-              key={result.id}
+              key={index}
               className={`p-4 rounded-lg border ${
                 view === "grid"
                   ? ""

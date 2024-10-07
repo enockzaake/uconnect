@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 //@ts-ignore
 import Slider from "react-slick";
 import Image from "next/image";

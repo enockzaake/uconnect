@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Database } from "./database";
 
 export interface StudentProfile {
   id: number;
@@ -75,3 +77,5 @@ export interface SidebarLink {
   label: string;
   href: string;
 }
+
+export type TypedSupabaseClient = SupabaseClient<Database>;

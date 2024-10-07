@@ -1,6 +1,6 @@
-"use client";
+// "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -15,9 +15,19 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Grid2X2, List, Search, SlidersHorizontal } from "lucide-react";
 
-export default function SearchPage() {
-  const [view, setView] = useState<"grid" | "list">("grid");
-  const [searchQuery, setSearchQuery] = useState("");
+import { getAllPrograms } from "@/actions/user";
+import { AddChosenProgramButton } from "@/components/ActionBUttons";
+
+export default async function SearchPage() {
+  // const [view, setView] = useState<"grid" | "list">("grid");
+  // const [searchQuery, setSearchQuery] = useState("");
+  // const [programs, setPrograms] = useState([1, 2, 3, 4, 5, 6]);
+  const view = "grid";
+  const searchQuery = "";
+
+  const { programs, error } = await getAllPrograms();
+
+  if (error) return <div className="">{error}</div>;
 
   // Mock data for demonstration
   const results = [
@@ -41,8 +51,8 @@ export default function SearchPage() {
           <Input
             className="pl-8"
             placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            // value={searchQuery}
+            // onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <Dialog>
@@ -95,7 +105,7 @@ export default function SearchPage() {
         <Button
           variant="outline"
           size="icon"
-          onClick={() => setView(view === "grid" ? "list" : "grid")}
+          // onClick={() => setView(view === "grid" ? "list" : "grid")}
         >
           {view === "grid" ? (
             <List className="h-4 w-4" />
@@ -105,7 +115,14 @@ export default function SearchPage() {
         </Button>
       </div>
 
-      <div
+      {programs.map((program: any, index: number) => (
+        <div key={index} className="flex items-center justify-between max-w-lg">
+          {program.name}
+          <AddChosenProgramButton programID={program.id as string} />
+        </div>
+      ))}
+
+      {/* <div
         className={`overflow-y-auto flex-grow ${
           view === "grid" ? "pr-2" : "pr-4"
         }`}
@@ -117,9 +134,9 @@ export default function SearchPage() {
               : "space-y-4"
           }
         >
-          {results.map((result) => (
+          {results.map((result, index) => (
             <div
-              key={result.id}
+              key={index}
               className={`p-4 rounded-lg border ${
                 view === "grid"
                   ? ""
@@ -142,7 +159,7 @@ export default function SearchPage() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

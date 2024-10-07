@@ -45,7 +45,12 @@ const Sidebar = () => {
         <Separator />
 
         {SidebarLinks.map((item, index) => (
-          <SidebarItem icon={item.icon} label={item.label} href={item.href} />
+          <SidebarItem
+            key={index}
+            icon={item.icon}
+            label={item.label}
+            href={item.href}
+          />
         ))}
       </nav>
 

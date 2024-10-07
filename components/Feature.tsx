@@ -51,7 +51,7 @@ const Feature = () => {
                   className="relative circle-check custom-list"
                   custom={{ duration: 2 + index }}
                   variants={scrollAnimation}
-                  key={feature}
+                  key={index}
                   whileHover={{
                     scale: 1.1,
                     transition: {
