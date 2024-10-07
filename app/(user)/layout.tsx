@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Sidebar from "@/components/Sidebar";
+import DashboardHeader from "@/components/DashboardHeader";
 
 export const metadata: Metadata = {
   title: "Universities Connect",

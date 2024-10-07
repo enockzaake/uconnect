@@ -34,12 +34,12 @@ export default function SearchPage() {
   ];
 
   return (
-    <div className="container mx-auto p-4 h-screen flex flex-col">
+    <div className="container px-16 p-4 h-screen flex flex-col">
       <div className="flex items-center space-x-2 mb-4">
         <div className="relative flex-grow">
-          <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2" />
           <Input
-            className="pl-8"
+            className="pl-8 py-6 border-black"
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}

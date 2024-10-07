@@ -1,20 +1,9 @@
 "use client";
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import {
-  CheckCircle,
-  Clock,
-  Home,
-  LayoutDashboard,
-  LogOut,
-  Mail,
-  Settings,
-  User,
-  XCircle,
-} from "lucide-react";
+import { CheckCircle, Clock, Menu, XCircle } from "lucide-react";
+import { useSideBar } from "@/store";
 
 // Mock data
 const applicant = {
@@ -73,29 +62,13 @@ const StatusIcon = ({ status }: { status: string }) => {
   }
 };
 
-const SidebarItem = ({
-  icon,
-  children,
-}: {
-  icon: React.ReactNode;
-  children: React.ReactNode;
-}) => (
-  <Button variant="ghost" className="w-full justify-start">
-    {icon}
-    <span className="ml-2">{children}</span>
-  </Button>
-);
-
-export default function Component() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+export default function Dashboard() {
+  const { toggleSideBar } = useSideBar();
 
   return (
     <main className="flex-1 p-6 overflow-auto">
-      <Button
-        className="md:hidden mb-4"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        Toggle Sidebar
+      <Button className="md:hidden mb-4" onClick={toggleSideBar}>
+        <Menu />
       </Button>
 
       <Card className="mb-6">
@@ -127,7 +100,7 @@ export default function Component() {
         </CardContent>
       </Card>
 
-      <h3 className="text-lg font-semibold mb-4">Applied Programs</h3>
+      <h3 className="text-lg font-semibold mb-4">Selected Programs</h3>
       <div className="space-y-4">
         {applicant.programs.map((program, index) => (
           <Card key={index}>

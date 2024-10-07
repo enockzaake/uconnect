@@ -2,9 +2,10 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
+import { useSideBar } from "@/store";
 
 const DashboardHeader = ({ title }: { title: string }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { sidebarOpen, toggleSideBar } = useSideBar();
 
   return (
     <header className="bg-white w-full shadow-sm">
@@ -13,7 +14,7 @@ const DashboardHeader = ({ title }: { title: string }) => {
           variant="ghost"
           size="icon"
           className="lg:hidden"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
+          onClick={toggleSideBar}
         >
           {sidebarOpen ? (
             <X className="h-6 w-6" />

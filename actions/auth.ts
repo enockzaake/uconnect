@@ -5,9 +5,7 @@ import { encodedRedirect } from "@/lib/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const signUpAction = async (formData: FormData) => {
-  const email = formData.get("email")?.toString();
-  const password = formData.get("password")?.toString();
+export const signUpAction = async (email: string, password: string) => {
   const supabase = createClient();
   const origin = headers().get("origin");
 
@@ -15,41 +13,48 @@ export const signUpAction = async (formData: FormData) => {
     return { error: "Email and password are required" };
   }
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${origin}/auth/callback`,
+      // emailRedirectTo: `${origin}/auth/callback`,
     },
   });
 
   if (error) {
-    console.error(error.code + " " + error.message);
-    return encodedRedirect("error", "/sign-up", error.message);
+    return { error: error?.message };
   } else {
-    return encodedRedirect(
-      "success",
-      "/sign-up",
-      "Thanks for signing up! Please check your email for a verification link."
-    );
+    const newProfile = await supabase
+      .from("profiles")
+      .insert([{ id: data.user?.id }]);
+
+    if (newProfile.error) return { error: newProfile.error.message };
+    // return { error: null };
+    console.log("NEW PROFILE CREATED:", newProfile.data);
+    redirect("/dashboard");
   }
 };
 
-export const signInAction = async (formData: FormData) => {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+export const signInAction = async (email: string, password: string) => {
   const supabase = createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
-  if (error) {
-    return encodedRedirect("error", "/sign-in", error.message);
+  if (!email || !password) {
+    return { error: "Missing email or password" };
   }
 
-  return redirect("/protected");
+  console.log("DATA:", data.user);
+  console.log("ERROR:", error?.message);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return redirect("/dashboard");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
@@ -126,5 +131,5 @@ export const resetPasswordAction = async (formData: FormData) => {
 export const signOutAction = async () => {
   const supabase = createClient();
   await supabase.auth.signOut();
-  return redirect("/sign-in");
+  return redirect("/login");
 };

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface StudentProfile {
   id: number;
   user_id: number;
@@ -66,4 +68,10 @@ export interface StudentProfile {
   referee_2_email_address: string;
   referee_2_capacity_known: string;
   referee_2_reference_file: string;
+}
+
+export interface SidebarLink {
+  icon: ReactNode;
+  label: string;
+  href: string;
 }
