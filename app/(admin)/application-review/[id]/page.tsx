@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { sampleProfile } from "@/constants/sampleProfile";
@@ -6,6 +6,8 @@ import { StudentProfile } from "@/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import DashboardHeader from "@/components/DashboardHeader";
+
+import { getUserProfile } from "@/actions/admin";
 
 function InfoItem({ label, value }: { label: string; value: string }) {
   return (
@@ -20,13 +22,31 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   return <h3 className="text-xl font-bold text-primary mb-3">{children}</h3>;
 }
 
-export default function Component() {
-  const profile: StudentProfile = sampleProfile;
+export default async function ProfileReview({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { data, error } = await getUserProfile(params.id);
+  const profile: StudentProfile & any = data;
+
+  if (!data) return <div className="">Profile not found</div>;
   return (
     <Card className="w-full mx-auto ">
       <DashboardHeader
+        backButton={true}
         title={`Student Profile: ${profile.first_name} ${profile.last_name}`}
       />
+      <CardHeader>
+        <div className="">
+          {profile.chosen_programs.map((program: any, index: number) => (
+            <div key={index}>
+              {index} {" : "}
+              {program.programs.name}
+            </div>
+          ))}
+        </div>
+      </CardHeader>
       <CardContent className=" max-w-6xl">
         <Tabs defaultValue="personal" className="w-full">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">

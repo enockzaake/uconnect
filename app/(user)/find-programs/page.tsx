@@ -17,31 +17,14 @@ import { Grid2X2, List, Search, SlidersHorizontal } from "lucide-react";
 
 import { getAllPrograms } from "@/actions/user";
 import { AddChosenProgramButton } from "@/components/ActionBUttons";
+import Image from "next/image";
 
 export default async function SearchPage() {
-  // const [view, setView] = useState<"grid" | "list">("grid");
-  // const [searchQuery, setSearchQuery] = useState("");
-  // const [programs, setPrograms] = useState([1, 2, 3, 4, 5, 6]);
-  const view = "grid";
-  const searchQuery = "";
+  const view: string = "grid";
 
   const { programs, error } = await getAllPrograms();
 
   if (error) return <div className="">{error}</div>;
-
-  // Mock data for demonstration
-  const results = [
-    { id: 1, title: "Result 1", description: "This is the first result" },
-    { id: 2, title: "Result 2", description: "This is the second result" },
-    { id: 3, title: "Result 3", description: "This is the third result" },
-    { id: 4, title: "Result 4", description: "This is the fourth result" },
-    { id: 5, title: "Result 5", description: "This is the fifth result" },
-    { id: 6, title: "Result 6", description: "This is the sixth result" },
-    { id: 7, title: "Result 7", description: "This is the seventh result" },
-    { id: 8, title: "Result 8", description: "This is the eighth result" },
-    { id: 9, title: "Result 9", description: "This is the ninth result" },
-    { id: 10, title: "Result 10", description: "This is the tenth result" },
-  ];
 
   return (
     <div className="container mx-auto p-4 h-screen flex flex-col">
@@ -115,14 +98,7 @@ export default async function SearchPage() {
         </Button>
       </div>
 
-      {programs.map((program: any, index: number) => (
-        <div key={index} className="flex items-center justify-between max-w-lg">
-          {program.name}
-          <AddChosenProgramButton programID={program.id as string} />
-        </div>
-      ))}
-
-      {/* <div
+      <div
         className={`overflow-y-auto flex-grow ${
           view === "grid" ? "pr-2" : "pr-4"
         }`}
@@ -134,32 +110,39 @@ export default async function SearchPage() {
               : "space-y-4"
           }
         >
-          {results.map((result, index) => (
+          {programs.map((program, index) => (
             <div
               key={index}
-              className={`p-4 rounded-lg border ${
+              className={`p-2 rounded-lg border ${
                 view === "grid"
                   ? ""
                   : "flex flex-col sm:flex-row sm:items-center sm:space-x-4"
               }`}
             >
-              <div
-                className={`bg-muted rounded-md mb-2 ${
-                  view === "grid"
-                    ? "w-full h-40"
-                    : "w-full sm:w-24 h-24 flex-shrink-0"
-                }`}
+              <Image
+                alt="image"
+                width={200}
+                height={200}
+                className="w-full h-40 rounded"
+                style={{
+                  objectFit: "cover",
+                }}
+                src="https://www.bestchoiceschools.com/wp-content/uploads/2021/12/shutterstock_1058078960-scaled.jpg"
               />
               <div className={view === "list" ? "flex-grow" : ""}>
-                <h3 className="font-semibold">{result.title}</h3>
+                <h3 className="font-semibold capitalize">
+                  {program.name?.toLowerCase()}
+                </h3>
+                <AddChosenProgramButton programID={program.id as string} />
                 <p className="text-sm text-muted-foreground">
-                  {result.description}
+                  {/* @ts-ignore */}
+                  {program.description}
                 </p>
               </div>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

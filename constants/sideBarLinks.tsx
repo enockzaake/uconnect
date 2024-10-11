@@ -7,6 +7,8 @@ import {
   User,
   CircleHelp,
   Search,
+  ListCheck,
+  ScrollText,
 } from "lucide-react";
 
 export const SidebarLinks: SidebarLink[] = [
@@ -39,5 +41,33 @@ export const SidebarLinks: SidebarLink[] = [
     icon: <CircleHelp className="h-4 w-4" />,
     href: "/help",
     label: "Help",
+  },
+];
+
+export const AdminSidebarLinks: SidebarLink[] = [
+  {
+    icon: <LayoutDashboard className="h-4 w-4" />,
+    href: "/admin-dashboard",
+    label: "Dashboard",
+  },
+  {
+    icon: <ListCheck className="h-4 w-4" />,
+    href: "/review-done",
+    label: "Reviewed applications",
+  },
+  {
+    icon: <ScrollText className="h-4 w-4" />,
+    href: "/all-programs",
+    label: "All programs",
+  },
+  {
+    icon: <CalendarDays className="h-4 w-4" />,
+    href: "/manage-events",
+    label: "Manage events",
+  },
+  {
+    icon: <Mail className="h-4 w-4" />,
+    href: "/inquiries",
+    label: "Inquiries",
   },
 ];

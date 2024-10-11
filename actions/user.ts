@@ -1,5 +1,6 @@
 "use server";
 import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
 
 export async function getUserProfile() {
   const supabase = createClient();
@@ -26,6 +27,7 @@ export async function addProgram(programID: string) {
     .from("chosen_programs")
     .insert([{ program_id: programID, user_id: user?.id }])
     .select();
+  revalidatePath("/dashboard");
 
   if (insert_error?.code === "23505") {
     return { error: "Program already added to application list" };
@@ -42,29 +44,33 @@ export async function removeProgram(chosenProgramID: string) {
     return { error: error?.message };
   }
 
-  const { error: delete_error } = await supabase
+  const { data, error: delete_error } = await supabase
     //@ts-ignore
     .from("chosen_programs")
     .delete()
-    .eq("id", chosenProgramID);
+    .eq("program_id", chosenProgramID);
+  revalidatePath("/dashboard");
 
   return { error: delete_error?.message };
 }
 
 export async function getUserChosenPrograms() {
   const supabase = createClient();
-  const { error } = await supabase.auth.getUser();
+  const { data, error } = await supabase.auth.getUser();
 
   if (error) {
     return { error: error?.message };
   }
 
-  let { data: chosen_programs, error: error2 } = await supabase
-    //@ts-ignore
-    .from("chosen_programs")
-    .select(`*,programs(name)`);
+  const { data: chosen_programs, error: error2 } = await supabase
+    .from("profiles")
+    .select(
+      `id,first_name,last_name,status,email,chosen_programs(*,programs(*))`
+    )
+    .eq("id", data.user.id)
+    .single();
 
-  return { chosen_programs: chosen_programs, error: error2?.message };
+  return { profile: chosen_programs, error: error2?.message };
 }
 
 export async function SubmitApplication() {

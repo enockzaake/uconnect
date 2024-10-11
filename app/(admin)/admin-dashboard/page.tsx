@@ -1,81 +1,43 @@
-"use client";
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Suspense } from "react";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, Users, ShoppingCart, TrendingUp } from "lucide-react";
 
 import AdminApplicationsTable from "@/components/AdminApplicationsTable";
 import DashboardHeader from "@/components/DashboardHeader";
+import { TableLoadingSkeleton } from "@/components/Loaders";
 
-export default function Dashboard() {
+export default async function Dashboard() {
   const stats = [
     {
-      title: "Total Revenue",
-      value: "$45,231.89",
+      title: "New applications",
+      value: "23",
       icon: DollarSign,
-      change: "+20.1% from last month",
-      color: "bg-green-100 text-green-800",
+      change: "Applications received today",
+      color: "bg-green-100 text-gray-900",
     },
     {
-      title: "Active Users",
-      value: "2,350",
+      title: "Resume",
+      value: "Link",
       icon: Users,
-      change: "+180.1% from last month",
-      color: "bg-blue-100 text-blue-800",
+      change: "Find last reviewed application",
+      color: "bg-blue-100 text-gray-900",
     },
     {
-      title: "New Orders",
+      title: "On hold",
       value: "1,247",
       icon: ShoppingCart,
       change: "+19% from last month",
-      color: "bg-yellow-100 text-yellow-800",
+      color: "bg-yellow-100 text-gray-900",
     },
     {
-      title: "Growth Rate",
-      value: "12.5%",
+      title: "Total completed",
+      value: "456",
       icon: TrendingUp,
       change: "+2.3% from last month",
-      color: "bg-purple-100 text-purple-800",
+      color: "bg-purple-100 text-gray-900",
     },
   ];
-
-  // const items = [
-  //   {
-  //     id: 1,
-  //     name: "Product A",
-  //     category: "Electronics",
-  //     price: "$199.99",
-  //     stock: 50,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Product B",
-  //     category: "Clothing",
-  //     price: "$49.99",
-  //     stock: 100,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Product C",
-  //     category: "Home & Garden",
-  //     price: "$79.99",
-  //     stock: 30,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Product D",
-  //     category: "Electronics",
-  //     price: "$299.99",
-  //     stock: 20,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Product E",
-  //     category: "Clothing",
-  //     price: "$39.99",
-  //     stock: 75,
-  //   },
-  // ];
 
   return (
     <div className="flex-1 flex-col overflow-hidden">
@@ -87,7 +49,7 @@ export default function Dashboard() {
             {stats.map((stat, index) => (
               <Card key={index} className={`${stat.color} border-none`}>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
+                  <CardTitle className="text-m font-medium">
                     {stat.title}
                   </CardTitle>
                   <stat.icon className="h-4 w-4" />
@@ -99,7 +61,9 @@ export default function Dashboard() {
               </Card>
             ))}
           </div>
-          <AdminApplicationsTable />
+          <Suspense key={""} fallback={<TableLoadingSkeleton />}>
+            <AdminApplicationsTable />
+          </Suspense>
         </div>
       </main>
     </div>

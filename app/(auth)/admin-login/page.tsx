@@ -13,13 +13,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
-import { signInAction } from "@/actions/auth";
+import { AdminSignInAction } from "@/actions/auth";
 import { Spinner } from "@/components/Loaders";
 import { isValidEmail } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ email: "", password: "" });
@@ -36,26 +34,25 @@ export default function LoginForm() {
       passwordRequired: false,
     });
 
-    if (!data.email || !isValidEmail(data.email)) {
-      setErrorMessages((prev) => ({ ...prev, emailRequired: true }));
-      setLoading(false); // Add this to stop loading when validation fails
-      return;
-    }
+    if (!data.email || !data.password) {
+      if (data.email === "" || !isValidEmail(data.email)) {
+        setErrorMessages((prev) => ({ ...prev, emailRequired: true }));
+      }
+      if (!data.password) {
+        setErrorMessages((prev) => ({ ...prev, passwordRequired: true }));
+      }
 
-    if (!data.password) {
-      setErrorMessages((prev) => ({ ...prev, passwordRequired: true }));
-      setLoading(false); // Add this to stop loading when validation fails
+      setLoading(false);
       return;
     }
 
     try {
-      const { error } = await signInAction(data.email, data.password);
+      const { error } = await AdminSignInAction(data.email, data.password);
       if (error) {
         setError(error);
-      } 
-      router.push("/dashboard");
+      }
     } catch (error: any) {
-      setError(error?.message || "An unknown error occurred");
+      setError("An error occurred");
     } finally {
       setLoading(false);
     }
@@ -64,10 +61,8 @@ export default function LoginForm() {
   return (
     <Card className="mx-auto max-w-sm mt-32">
       <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
+        <CardTitle className="text-2xl">Admin Login</CardTitle>
+        <CardDescription>Restricted login for admins</CardDescription>
         {error && (
           <Label className="text-red-500 border border-red-100 py-3 px-1 bg-red-100 rounded capitalize">
             {error}
@@ -128,9 +123,6 @@ export default function LoginForm() {
           <Link href="/sign-up" className="underline">
             Sign up
           </Link>
-        </div>
-        <div className="text-center hover:text-blue-600">
-          <Link href="/admin-login">Admin Login</Link>
         </div>
       </CardContent>
     </Card>

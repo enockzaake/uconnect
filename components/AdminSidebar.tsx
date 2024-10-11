@@ -1,54 +1,83 @@
 "use client";
-import React, { useState } from "react";
-
+import { Separator } from "@/components/ui/separator";
+import { LogOut, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { X, Home, Settings, HelpCircle } from "lucide-react";
+import { useSideBar } from "@/store";
+import Logo from "./Logo";
+import Link from "next/link";
+import { AdminSidebarLinks } from "@/constants/sideBarLinks";
+import { signOutAction } from "@/actions/auth";
+import { usePathname } from "next/navigation";
 
-const AdminSidebar = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+const SidebarItem = ({
+  icon,
+  label,
+  href,
+  active,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  href: string;
+  active: boolean;
+}) => (
+  <Link href={href}>
+    <Button
+      variant="ghost"
+      className={`w-full justify-start hover:bg-gray-200 ${
+        active ? "bg-gray-300 hover:bg-gray-300" : ""
+      }`}
+    >
+      {icon}
+      <span className="ml-2 capitalize">{label}</span>
+    </Button>
+  </Link>
+);
+
+const Sidebar = () => {
+  const { sidebarOpen, toggleSideBar } = useSideBar();
+  const pathname = usePathname();
 
   return (
     <aside
-      className={`bg-gray-100 w-64 min-h-screen flex flex-col transition-all duration-300 ease-in-out 
-    ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} 
-    fixed lg:relative lg:translate-x-0 z-10`}
+      className={`bg-gray-100 w-64 min-h-screen p-4 ${
+        sidebarOpen ? "block absolute" : "hidden"
+      } md:flex flex-col justify-between md:relative`}
     >
-      <div className="p-4 border-b flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-gray-800">Dashboard</h2>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-          aria-label="Close sidebar"
-        >
-          <X className="h-6 w-6" />
-        </Button>
-      </div>
-      <nav className="flex-1 p-4">
-        <ul className="space-y-2">
-          <li>
-            <Button variant="ghost" className="w-full justify-start">
-              <Home className="mr-2 h-4 w-4" />
-              Home
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" className="w-full justify-start">
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" className="w-full justify-start">
-              <HelpCircle className="mr-2 h-4 w-4" />
-              Help
-            </Button>
-          </li>
-        </ul>
+      <nav className="space-y-2">
+        <div className="flex items-center justify-between">
+          <Logo />
+          <X
+            onClick={toggleSideBar}
+            className="md:hidden h-8 w-8 hover:cursor-pointer"
+          />
+        </div>
+        <Separator />
+
+        {AdminSidebarLinks.map((item, index) => (
+          <SidebarItem
+            active={
+              pathname === item.href ||
+              (pathname.startsWith("/application-review") &&
+                item.href === "/admin-dashboard")
+            }
+            key={index}
+            icon={item.icon}
+            label={item.label}
+            href={item.href}
+          />
+        ))}
+      </nav>
+
+      <nav>
+        <form action={signOutAction}>
+          <Button variant="outline" className="w-full justify-start">
+            <LogOut className="w-4 h-4" />
+            Logout
+          </Button>
+        </form>
       </nav>
     </aside>
   );
 };
 
-export default AdminSidebar;
+export default Sidebar;

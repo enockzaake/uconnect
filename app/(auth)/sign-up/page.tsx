@@ -132,7 +132,7 @@ export default function SIgnUp() {
             />
             {!passwordsMatch && (
               <Label className="text-red-500 text-xs -mt-2 ml-1">
-                Passwords don't match
+                Passwords don&apos;t match
               </Label>
             )}
           </div>

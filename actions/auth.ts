@@ -1,5 +1,6 @@
 "use server";
 
+import { supabaseAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { encodedRedirect } from "@/lib/utils";
 import { headers } from "next/headers";
@@ -26,11 +27,11 @@ export const signUpAction = async (email: string, password: string) => {
   } else {
     const newProfile = await supabase
       .from("profiles")
+      // @ts-ignore
       .insert([{ id: data.user?.id }]);
 
     if (newProfile.error) return { error: newProfile.error.message };
     // return { error: null };
-    console.log("NEW PROFILE CREATED:", newProfile.data);
     redirect("/dashboard");
   }
 };
@@ -38,23 +39,36 @@ export const signUpAction = async (email: string, password: string) => {
 export const signInAction = async (email: string, password: string) => {
   const supabase = createClient();
 
+  if (!email || !password) {
+    return { error: "Missing email or password" };
+  }
+
+  //@ts-ignore
+  const res = await supabaseAdminClient.rpc("get_user_by_email", { email });
+
+  if (res.error) {
+    return { error: "User not found or error in fetching user" };
+  }
+
+  //@ts-ignore
+  const isAdmin = res.data[0]?.raw_app_meta_data?.admin;
+  if (isAdmin) {
+    return { error: "Admins cannot log in through this portal" };
+  }
+
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
-  if (!email || !password) {
-    return { error: "Missing email or password" };
-  }
-
-  console.log("DATA:", data.user);
-  console.log("ERROR:", error?.message);
-
   if (error) {
     return { error: error.message };
   }
 
-  return redirect("/dashboard");
+  return { error: null };
+  
+
+  // redirect("/dashboard");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
@@ -132,4 +146,35 @@ export const signOutAction = async () => {
   const supabase = createClient();
   await supabase.auth.signOut();
   return redirect("/login");
+};
+
+// -----------------------------------------------------------
+// ADMIN AUTH
+
+export const AdminSignInAction = async (email: string, password: string) => {
+  const supabase = createClient();
+
+  //@ts-ignore
+  const res = await supabaseAdminClient.rpc("get_user_by_email", {
+    email: email,
+  });
+
+  //@ts-ignore
+  const isAdmin = res.data[0].raw_app_meta_data.admin;
+  if (!isAdmin) return { error: "Invalid credentials" };
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (!email || !password) {
+    return { error: "Missing email or password" };
+  }
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return redirect("/admin-dashboard");
 };
