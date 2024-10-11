@@ -51,7 +51,7 @@ const Header = () => {
       </nav>
       {isloggedIn ? (
         <div className="ml-4 flex gap-2">
-          <Link className="hidden sm:block" href="/dashboard">
+          <Link className=" sm:block" href="/dashboard">
             <Button size="sm">Dashboard</Button>
           </Link>
         </div>

@@ -20,19 +20,21 @@ const SidebarItem = ({
   label: string;
   href: string;
   active: boolean;
-}) => (
-  <Link href={href}>
-    <Button
-      variant="ghost"
-      className={`w-full justify-start hover:bg-gray-200 ${
-        active ? "bg-gray-200 hover:bg-gray-300" : ""
-      }`}
-    >
-      {icon}
-      <span className="ml-2 capitalize">{label}</span>
-    </Button>
-  </Link>
-);
+}) => {
+  return (
+    <Link href={href}>
+      <Button
+        variant="ghost"
+        className={`w-full justify-start hover:bg-gray-200 ${
+          active ? "bg-gray-200 hover:bg-gray-300" : ""
+        }`}
+      >
+        {icon}
+        <span className="ml-2 capitalize">{label}</span>
+      </Button>
+    </Link>
+  );
+};
 
 export default function Sidebar() {
   const { toggleSideBar, sidebarOpen } = useSideBar();
