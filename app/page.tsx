@@ -14,12 +14,14 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import Logo from "@/components/Logo";
+import TestComponent from "@/components/Test";
 import Header from "@/components/Header";
 import WhatsappBot from "@/components/WhatsappBot";
 
 export default function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+
   const testimonials = [
     {
       name: "Emily Johnson",
@@ -50,6 +52,45 @@ export default function LandingPage() {
     { title: "Canada", image: "/images/canada.jpg" },
   ];
 
+  const heroSlides = [
+    {
+      image: "/images/usa.jpg",
+      title: "Explore the USA's Academic Excellence",
+      description:
+        "Study in the USA and immerse yourself in top-tier education, vibrant cities, and diverse cultures with U-CONNECT.",
+    },
+    {
+      image: "/images/italy.jpg",
+      title: "Experience Italy's Rich Heritage",
+      description:
+        "Dive into Italy’s world-renowned arts, history, and culinary traditions while advancing your education.",
+    },
+    {
+      image: "/images/france-hero.jpg",
+      title: "Learn and Live in Iconic France",
+      description:
+        "Pursue your academic goals in France, where world-class education meets rich cultural experiences.",
+    },
+    {
+      image: "/images/france-2.jpg",
+      title: "Shape Your Future in France",
+      description:
+        "Gain critical skills and a global outlook while studying in the heart of France’s innovative academic institutions.",
+    },
+    {
+      image: "/images/canada.jpg",
+      title: "Unlock Opportunities in Canada",
+      description:
+        "Study in Canada, known for its top universities, multicultural environments, and high-quality education.",
+    },
+    {
+      image: "/images/germany.jpg",
+      title: "Innovate and Learn in Germany",
+      description:
+        "Join Germany’s renowned universities and enhance your skills in a country famous for its engineering and technology sectors.",
+    },
+  ];
+
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % testimonials.length);
   };
@@ -60,23 +101,13 @@ export default function LandingPage() {
     );
   };
 
-  const stats = [
-    { label: "Study Destinations", value: "50+" },
-    { label: "Students Helped", value: "10,000+" },
-    { label: "Partner Universities", value: "200+" },
-    { label: "Years of Experience", value: "15+" },
-  ];
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000); // Change slide every 5 seconds
 
-  const universities = [
-    "Harvard University",
-    "University of Oxford",
-    "Stanford University",
-    "University of Cambridge",
-    "MIT",
-    "ETH Zurich",
-    "University of Tokyo",
-    "National University of Singapore",
-  ];
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const marquee = document.getElementById("university-marquee");
@@ -87,240 +118,153 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
       <WhatsappBot />
       <main className="flex-1">
-        <section className="w-full py-24 md:py-24 lg:py-32 xl:pt-48 bg-white relative overflow-hidden">
-          <div className="absolute inset-0">
+        <section className="relative w-full h-[calc(80vh-3.5rem)] overflow-hidden">
+          <div
+            className="absolute inset-0 bg-repeat opacity-10"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23EF4444' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: "20px 20px",
+            }}
+          ></div>
+          {heroSlides.map((slide, index) => (
             <div
-              className="absolute inset-0 bg-blue-100 opacity-50"
-              style={{
-                backgroundImage: `radial-gradient(circle, #3B82F6 1px, transparent 1px)`,
-                backgroundSize: "30px 30px",
-              }}
-            ></div>
-          </div>
-          <div className="container px-4 md:px-6 relative z-10">
-            <div className="flex flex-col justify-center items-center space-y-4">
-              <div className="space-y-2 text-center">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-blue-600">
-                  Discover the World Through Education
-                </h1>
-                <p className="max-w-[600px] text-zinc-500 md:text-xl mx-auto">
-                  Embark on a life-changing journey with Universities Connect.
-                  Explore new cultures, learn new languages, and gain invaluable
-                  experiences that will shape your future.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <Link
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-700 disabled:pointer-events-none disabled:opacity-50"
-                  href="/login"
-                >
-                  Get started
-                </Link>
-                <Link
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-blue-200 bg-white px-8 text-sm font-medium text-blue-600 shadow-sm transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-700 disabled:pointer-events-none disabled:opacity-50"
-                  href="/inquiries"
-                >
-                  Contact an Advisor
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-16 lg:py-16 bg-blue-50">
-          <div className="container px-4 md:px-">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap- text-center">
-              {stats.map((stat, index) => (
-                <div key={index} className="space-y-2">
-                  <h3 className="text-4xl font-bold text-blue-600">
-                    {stat.value}
-                  </h3>
-                  <p className="text-sm font-medium text-zinc-500">
-                    {stat.label}
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentHeroSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                fill
+                objectFit="cover"
+                priority={index === 0}
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div className="text-center text-white px-4">
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                    {slide.title}
+                  </h1>
+                  <p className="text-xl md:text-2xl mb-8">
+                    {slide.description}
                   </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 overflow-hidden bg-white">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-2xl font-bold text-center mb-8 text-blue-600">
-              Our Partner Universities
-            </h2>
-            <div className="relative">
-              <div
-                id="university-marquee"
-                className="flex space-x-8 animate-marquee"
-              >
-                {universities.map((uni, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-center bg-white rounded-lg shadow-md p-4 w-48 h-24"
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-red-700 hover:bg-red-800 text-white"
                   >
-                    <span className="text-sm font-semibold text-center">
-                      {uni}
-                    </span>
-                  </div>
-                ))}
+                    <Link href={"/find-programs"}>Explore Programs</Link>
+                  </Button>
+                </div>
               </div>
+            </div>
+          ))}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+            {heroSlides.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full ${
+                  index === currentHeroSlide
+                    ? "bg-red-700"
+                    : "bg-white bg-opacity-50"
+                }`}
+                onClick={() => setCurrentHeroSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
+              onClick={() =>
+                setCurrentHeroSlide(
+                  (prev) => (prev - 1 + heroSlides.length) % heroSlides.length
+                )
+              }
+            >
+              <ChevronLeft className="h-4 w-4" />
+              <span className="sr-only">Previous slide</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
+              onClick={() =>
+                setCurrentHeroSlide((prev) => (prev + 1) % heroSlides.length)
+              }
+            >
+              <ChevronRight className="h-4 w-4" />
+              <span className="sr-only">Next slide</span>
+            </Button>
+          </div>
+        </section>
+
+        <section className="w-full py-6">
+          <div className="container px-4 md:px-6 mx-auto">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-red-700">
+                Your personalized dashboard
+              </h2>
+              <p className="max-w-[1200px] text-zinc-500">
+                Experience our user-friendly platform that makes planning your
+                study abroad journey a breeze.
+              </p>
+            </div>
+            <div className="mt-10">
+              <Image
+                src="/images/dashboard.png"
+                alt="U-CONNECT Dashboard"
+                width={1000}
+                height={400}
+                className="rounded-lg shadow-lg mx-auto"
+              />
             </div>
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-12 bg-blue-50">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-600">
-                  Why Choose U-Connect?
+        <TestComponent />
+
+        <section className="w-full py-12 ">
+          <div className="container px-4 md:px-24">
+            <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-12">
+              <div className="flex flex-col justify-center space-y-4">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-red-700">
+                  Comprehensive Visa Assistance
                 </h2>
-                <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  We offer unparalleled support and opportunities for students
-                  seeking to broaden their horizons through international
-                  education.
+                <p className="max-w-[600px] text-zinc-500 md:text-md/relaxed lg:text-base/relaxed xl:text-md/relaxed">
+                  We understand that the visa process can be daunting. That's
+                  why our dedicated team provides comprehensive support
+                  throughout your visa application journey. From document
+                  preparation to interview coaching, we're with you every step
+                  of the way until you're ready to embark on your study abroad
+                  adventure.
                 </p>
               </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-              <Card className="bg-white">
-                <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
-                  <GraduationCap className="h-12 w-12 text-blue-600" />
-                  <h3 className="text-xl font-bold">Expert Guidance</h3>
-                  <p className="text-zinc-500">
-                    Our experienced advisors provide personalized support
-                    throughout your study abroad journey.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white">
-                <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
-                  <Globe2 className="h-12 w-12 text-blue-600" />
-                  <h3 className="text-xl font-bold">Global Network</h3>
-                  <p className="text-zinc-500">
-                    Access to a wide range of prestigious universities and
-                    programs across the globe.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="bg-white">
-                <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
-                  <Users className="h-12 w-12 text-blue-600" />
-                  <h3 className="text-xl font-bold">Cultural Immersion</h3>
-                  <p className="text-zinc-500">
-                    Immerse yourself in new cultures and gain a global
-                    perspective that will benefit your future career.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-12">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-600">
-                  Our Programs
-                </h2>
-                <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Explore our diverse range of study abroad programs tailored to
-                  meet your academic and personal goals.
-                </p>
+              <div className="flex justify-center lg:order-first">
+                <Image
+                  src="/images/visa-approved.jpg"
+                  alt="Visa Assistance Process"
+                  width={600}
+                  height={400}
+                  className="rounded-lg"
+                />
               </div>
             </div>
-            <div className="mx-auto max-w-3xl space-y-4 pt-12">
-              <Tabs defaultValue="semester" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="semester">Semester Programs</TabsTrigger>
-                  <TabsTrigger value="summer">Summer Programs</TabsTrigger>
-                  <TabsTrigger value="year">Full Year Programs</TabsTrigger>
-                </TabsList>
-                <TabsContent value="semester">
-                  <Card>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-2">
-                        Semester Abroad
-                      </h3>
-                      <p className="text-zinc-500 mb-4">
-                        Immerse yourself in a new culture for a full semester.
-                        Perfect for students looking for an in-depth
-                        international experience without committing to a full
-                        year.
-                      </p>
-                      <Link
-                        className="inline-flex items-center text-blue-600 hover:underline"
-                        href="#"
-                      >
-                        Learn more about Semester Programs
-                        <ChevronRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                <TabsContent value="summer">
-                  <Card>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-2">Summer Abroad</h3>
-                      <p className="text-zinc-500 mb-4">
-                        Make the most of your summer break with our intensive
-                        programs. Gain credits while exploring new countries and
-                        cultures.
-                      </p>
-                      <Link
-                        className="inline-flex items-center text-blue-600 hover:underline"
-                        href="#"
-                      >
-                        Discover Summer Programs
-                        <ChevronRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                <TabsContent value="year">
-                  <Card>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-2">
-                        Full Year Abroad
-                      </h3>
-                      <p className="text-zinc-500 mb-4">
-                        Fully immerse yourself in a new academic and cultural
-                        environment for an entire academic year. Ideal for
-                        students seeking a comprehensive international
-                        experience.
-                      </p>
-                      <Link
-                        className="inline-flex items-center text-blue-600 hover:underline"
-                        href="#"
-                      >
-                        Explore Full Year Programs
-                        <ChevronRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
-            </div>
           </div>
         </section>
 
-        <section
-          id="destinatons"
-          className="w-full py-12 md:py-24 lg:py-32 bg-blue-50"
-        >
+        <section id="destinatons" className="w-full py-12">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-600">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-red-600">
                   Popular Destinations
                 </h2>
-                <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[900px] text-zinc-500 md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
                   Discover some of our most sought-after study abroad locations
                   around the world.
                 </p>
@@ -342,8 +286,8 @@ export default function LandingPage() {
                         {destination.title}
                       </h3>
                       <Link
-                        className="inline-flex items-center text-sm text-blue-600 hover:underline"
-                        href="#"
+                        className="inline-flex items-center  text-sm text-blue-600 hover:underline"
+                        href="/find-programs"
                       >
                         Explore programs
                         <ChevronRight className="ml-1 h-4 w-4" />
@@ -356,45 +300,11 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-12">
+        <section className="w-full py-12  bg-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-600">
-                  Sign up today to find your dream university.
-                </h2>
-                <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
-                  Take a look at our user-friendly platform that makes planning
-                  your study abroad experience a breeze.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto max-w-5xl py-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Dashboard Screenshot"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-lg"
-                />
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Program Search Screenshot"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-lg"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-blue-50">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-blue-600">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-red-700">
                   Student Testimonials
                 </h2>
                 <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -408,7 +318,7 @@ export default function LandingPage() {
                 <Card className="bg-white">
                   <CardContent className="p-6">
                     <p className="mb-4 italic">
-                      &quot;{testimonials[currentSlide].quote}&quot;
+                      "{testimonials[currentSlide].quote}"
                     </p>
                     <p className="font-semibold">
                       {testimonials[currentSlide].name}
@@ -421,7 +331,7 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
                   onClick={prevSlide}
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -430,7 +340,7 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
                   onClick={nextSlide}
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -440,8 +350,56 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+        <section className="w-full py-12 bg-white">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-red-700">
+                  Why U-CONNECT?
+                </h2>
+                <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  We offer unparalleled support and opportunities for students
+                  seeking to broaden their horizons through international
+                  education.
+                </p>
+              </div>
+            </div>
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
+              <Card className="bg-white">
+                <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
+                  <GraduationCap className="h-12 w-12 text-red-700" />
+                  <h3 className="text-xl font-bold">Expert Guidance</h3>
+                  <p className="text-zinc-500">
+                    Our experienced advisors provide personalized support
+                    throughout your study abroad journey.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white">
+                <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
+                  <Globe2 className="h-12 w-12 text-red-700" />
+                  <h3 className="text-xl font-bold">Global Network</h3>
+                  <p className="text-zinc-500">
+                    Access to a wide range of prestigious universities and
+                    programs across the globe.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white">
+                <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
+                  <Users className="h-12 w-12 text-red-700" />
+                  <h3 className="text-xl font-bold">Cultural Immersion</h3>
+                  <p className="text-zinc-500">
+                    Immerse yourself in new cultures and gain a global
+                    perspective that will benefit your future career.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-blue-600">
+        <section className="w-full py-12 bg-red-700">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -456,13 +414,13 @@ export default function LandingPage() {
               <div className="w-full max-w-sm space-y-2">
                 <form className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Input
-                    className="max-w-lg flex-1 bg-white text-blue-600 placeholder-blue-400"
+                    className="max-w-lg flex-1 bg-white text-red-700 placeholder-red-400"
                     placeholder="Enter your email"
                     type="email"
                   />
                   <Button
                     type="submit"
-                    className="bg-white text-blue-600 hover:bg-blue-50"
+                    className="bg-white text-red-700 hover:bg-red-50"
                   >
                     Get Started
                   </Button>
@@ -482,19 +440,19 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-blue-100">
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-red-100">
         <p className="text-xs text-zinc-500">
-          © 2024 UNIVERSITIES CONNECT. All rights reserved.
+          © 2024 U-CONNECT. All rights reserved.
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link
-            className="text-xs hover:underline underline-offset-4 text-blue-600"
+            className="text-xs hover:underline underline-offset-4 text-red-700"
             href="#"
           >
             Terms of Service
           </Link>
           <Link
-            className="text-xs hover:underline underline-offset-4 text-blue-600"
+            className="text-xs hover:underline underline-offset-4 text-red-700"
             href="#"
           >
             Privacy
