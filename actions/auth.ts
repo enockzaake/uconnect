@@ -14,6 +14,8 @@ export const signUpAction = async (email: string, password: string) => {
     return { error: "Email and password are required" };
   }
 
+  // Get extra details for personalization eg country , programs etc and add to meta data
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -47,7 +49,7 @@ export const signInAction = async (email: string, password: string) => {
   const res = await supabaseAdminClient.rpc("get_user_by_email", { email });
 
   if (res.error) {
-    return { error: "User not found or error in fetching user" };
+    return { error: "User not found" };
   }
 
   //@ts-ignore
@@ -66,7 +68,6 @@ export const signInAction = async (email: string, password: string) => {
   }
 
   return { error: null };
-  
 
   // redirect("/dashboard");
 };
@@ -178,3 +179,9 @@ export const AdminSignInAction = async (email: string, password: string) => {
 
   return redirect("/admin-dashboard");
 };
+
+const x = {
+  countries: ["usa", "canada"],
+  programs: ["software engineering", "mechanical"],
+  level: "bachelors",
+}

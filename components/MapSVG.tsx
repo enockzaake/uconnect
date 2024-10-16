@@ -23,7 +23,7 @@ const MapSVG = () => {
         r="7.8878"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.48121"
+        strokeWidth="1.48121"
       />
       <circle cx="823.504" cy="363.499" r="3.78207" fill="#F53838" />
       <g filter="url(#filter1_d)">
@@ -35,7 +35,7 @@ const MapSVG = () => {
         r="13.3244"
         fill="white"
         stroke="#F53838"
-        stroke-width="2.50213"
+        strokeWidth="2.50213"
       />
       <circle cx="859.659" cy="426.399" r="6.38884" fill="#F53838" />
       <g filter="url(#filter2_d)">
@@ -47,7 +47,7 @@ const MapSVG = () => {
         r="13.821"
         fill="white"
         stroke="#F53838"
-        stroke-width="2.59537"
+        strokeWidth="2.59537"
       />
       <circle cx="575.656" cy="400.775" r="6.62692" fill="#F53838" />
       <g filter="url(#filter3_d)">
@@ -59,7 +59,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="486.905" cy="282.054" r="4.62197" fill="#F53838" />
       <g filter="url(#filter4_d)">
@@ -71,7 +71,7 @@ const MapSVG = () => {
         r="16.3214"
         fill="white"
         stroke="#F53838"
-        stroke-width="3.06492"
+        strokeWidth="3.06492"
       />
       <circle cx="586.201" cy="299.489" r="7.82584" fill="#F53838" />
       <g filter="url(#filter5_d)">
@@ -83,7 +83,7 @@ const MapSVG = () => {
         r="13.2872"
         fill="white"
         stroke="#F53838"
-        stroke-width="2.49515"
+        strokeWidth="2.49515"
       />
       <circle cx="734.119" cy="258.698" r="6.37101" fill="#F53838" />
       <g filter="url(#filter6_d)">
@@ -95,7 +95,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="1005" cy="97.5258" r="4.62197" fill="#F53838" />
       <g filter="url(#filter7_d)">
@@ -107,7 +107,7 @@ const MapSVG = () => {
         r="16.296"
         fill="white"
         stroke="#F53838"
-        stroke-width="3.06015"
+        strokeWidth="3.06015"
       />
       <circle cx="778.133" cy="153.363" r="7.81367" fill="#F53838" />
       <g filter="url(#filter8_d)">
@@ -119,7 +119,7 @@ const MapSVG = () => {
         r="12.7064"
         fill="white"
         stroke="#F53838"
-        stroke-width="2.38607"
+        strokeWidth="2.38607"
       />
       <circle cx="672.5" cy="131.703" r="6.09249" fill="#F53838" />
       <g filter="url(#filter9_d)">
@@ -131,7 +131,7 @@ const MapSVG = () => {
         r="12.9188"
         fill="white"
         stroke="#F53838"
-        stroke-width="2.42596"
+        strokeWidth="2.42596"
       />
       <circle cx="573.604" cy="178.02" r="6.19436" fill="#F53838" />
       <g filter="url(#filter10_d)">
@@ -143,7 +143,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="530" cy="116.591" r="4.62197" fill="#F53838" />
       <g filter="url(#filter11_d)">
@@ -155,7 +155,7 @@ const MapSVG = () => {
         r="7.94908"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.49272"
+        strokeWidth="1.49272"
       />
       <circle cx="429.017" cy="27.5657" r="3.81145" fill="#F53838" />
       <g filter="url(#filter12_d)">
@@ -167,7 +167,7 @@ const MapSVG = () => {
         r="5.74726"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.07925"
+        strokeWidth="1.07925"
       />
       <circle cx="367.159" cy="106.046" r="2.75571" fill="#F53838" />
       <g filter="url(#filter13_d)">
@@ -179,7 +179,7 @@ const MapSVG = () => {
         r="5.74726"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.07925"
+        strokeWidth="1.07925"
       />
       <circle cx="741.758" cy="83.3271" r="2.75571" fill="#F53838" />
       <g filter="url(#filter14_d)">
@@ -191,7 +191,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="365.048" cy="40.3786" r="4.62197" fill="#F53838" />
       <g filter="url(#filter15_d)">
@@ -203,7 +203,7 @@ const MapSVG = () => {
         r="7.35487"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.38113"
+        strokeWidth="1.38113"
       />
       <circle cx="279.687" cy="10.1319" r="3.52653" fill="#F53838" />
       <g filter="url(#filter16_d)">
@@ -215,7 +215,7 @@ const MapSVG = () => {
         r="7.35487"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.38113"
+        strokeWidth="1.38113"
       />
       <circle cx="877.369" cy="103.009" r="3.52653" fill="#F53838" />
       <g filter="url(#filter17_d)">
@@ -227,7 +227,7 @@ const MapSVG = () => {
         r="7.35487"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.38113"
+        strokeWidth="1.38113"
       />
       <circle cx="807.838" cy="227.767" r="3.52653" fill="#F53838" />
       <g filter="url(#filter18_d)">
@@ -239,7 +239,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="292.5" cy="148.74" r="4.62197" fill="#F53838" />
       <g filter="url(#filter19_d)">
@@ -251,7 +251,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="305.312" cy="454.748" r="4.62197" fill="#F53838" />
       <g filter="url(#filter20_d)">
@@ -263,7 +263,7 @@ const MapSVG = () => {
         r="13.1166"
         fill="white"
         stroke="#F53838"
-        stroke-width="2.46311"
+        strokeWidth="2.46311"
       />
       <circle cx="333.291" cy="383.34" r="6.2892" fill="#F53838" />
       <g filter="url(#filter21_d)">
@@ -275,7 +275,7 @@ const MapSVG = () => {
         r="6.38609"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.19921"
+        strokeWidth="1.19921"
       />
       <circle cx="377.861" cy="372.127" r="3.06202" fill="#F53838" />
       <g filter="url(#filter22_d)">
@@ -287,7 +287,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="291.836" cy="330.156" r="4.62197" fill="#F53838" />
       <g filter="url(#filter23_d)">
@@ -299,7 +299,7 @@ const MapSVG = () => {
         r="6.40659"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.20306"
+        strokeWidth="1.20306"
       />
       <circle cx="44.0114" cy="103.818" r="3.07185" fill="#F53838" />
       <g filter="url(#filter24_d)">
@@ -311,7 +311,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="207.728" cy="106.85" r="4.62197" fill="#F53838" />
       <g filter="url(#filter25_d)">
@@ -323,7 +323,7 @@ const MapSVG = () => {
         r="9.63949"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.81015"
+        strokeWidth="1.81015"
       />
       <circle cx="131.498" cy="97.5253" r="4.62197" fill="#F53838" />
       <g filter="url(#filter26_d)">
@@ -335,7 +335,7 @@ const MapSVG = () => {
         r="14.0949"
         fill="white"
         stroke="#F53838"
-        stroke-width="2.64681"
+        strokeWidth="2.64681"
       />
       <circle cx="178.449" cy="161.552" r="6.75825" fill="#F53838" />
       <g filter="url(#filter27_d)">
@@ -347,7 +347,7 @@ const MapSVG = () => {
         r="7.98284"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.49906"
+        strokeWidth="1.49906"
       />
       <circle cx="198.996" cy="248.153" r="3.82764" fill="#F53838" />
       <g filter="url(#filter28_d)">
@@ -359,7 +359,7 @@ const MapSVG = () => {
         r="8.48018"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.59245"
+        strokeWidth="1.59245"
       />
       <circle cx="252.832" cy="214.663" r="4.0661" fill="#F53838" />
       <g filter="url(#filter29_d)">
@@ -371,7 +371,7 @@ const MapSVG = () => {
         r="7.34803"
         fill="white"
         stroke="#F53838"
-        stroke-width="1.37985"
+        strokeWidth="1.37985"
       />
       <circle cx="929.422" cy="446.71" r="3.52325" fill="#F53838" />
       <defs>

@@ -25,25 +25,25 @@ const Header = () => {
       <Logo />
       <nav className="hidden  ml-auto sm:flex gap-4 sm:gap-6">
         <Link
-          className="text-sm font-medium hover:text-blue-600 transition-colors"
+          className="text-sm font-medium hover:text-red-400 transition-colors"
           href="/find-programs"
         >
           Programs
         </Link>
         <Link
-          className="text-sm font-medium hover:text-blue-600 transition-colors"
+          className="text-sm font-medium hover:text-red-400 transition-colors"
           href="#destinatons"
         >
           Destinations
         </Link>
         <Link
-          className="text-sm font-medium hover:text-blue-600 transition-colors"
+          className="text-sm font-medium hover:text-red-400 transition-colors"
           href="#"
         >
           Resources
         </Link>
         <Link
-          className="text-sm font-medium hover:text-blue-600 transition-colors"
+          className="text-sm font-medium hover:text-red-400 transition-colors"
           href="/about"
         >
           About Us

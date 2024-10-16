@@ -91,11 +91,77 @@ export async function SubmitApplication() {
   return { error: error?.message };
 }
 
-export async function getAllPrograms() {
+export async function getAllPrograms(
+  searchTerm?: string,
+  country?: string,
+  level?: string
+) {
+  const supabase = createClient();
+  const { data: user } = await supabase.auth.getUser();
+  const meta_data = user.user?.user_metadata;
+
+  let query = supabase.from("programs").select("*");
+
+  // Apply filters based on user metadata if parameters are not provided
+  if (!searchTerm && meta_data?.programs) {
+    query = query.or(
+      meta_data?.programs
+        .map((program: string) => `name.ilike.%${program}%`)
+        .join(",")
+    );
+  }
+
+  if (!level && meta_data?.level) {
+    query = query.eq("level", meta_data?.level);
+  }
+
+  if (country === "default" && meta_data?.countries) {
+    query = query.in("country", meta_data?.countries);
+  }
+
+  // Apply filters based on provided parameters
+  if (searchTerm) {
+    query = query.ilike("name", `%${searchTerm}%`);
+  }
+
+  if (country && country !== "all" && country !== "default") {
+    query = query.eq("country", country);
+  }
+
+  if (level) {
+    query = query.eq("level", level);
+  }
+
+  const { data, error } = await query;
+
+  if (error) return { programs: [], error: error.message };
+  return { programs: data, error: null };
+}
+
+export async function getAvailableCountries() {
   const supabase = createClient();
 
-  const { data, error } = await supabase.from("programs").select("*");
-  if (error) return { programs: [], error: error.message };
+  const { data, error } = await supabase.from("programs").select("country");
 
-  return { programs: data, error: error };
+  let countries: string[] = [];
+
+  data?.forEach((entry) => {
+    //@ts-ignore
+    if (entry.country && !countries.includes(entry.country)) {
+      //@ts-ignore
+      countries.push(entry.country);
+    }
+  });
+
+  return { data: countries, error: error?.message };
 }
+
+async function sleep(ms: number) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// {
+//   countries: [ 'usa', 'canada' ],
+//   level: 'bachelors',
+//   programs: [ 'software engineering', 'mechanical' ],
+// }

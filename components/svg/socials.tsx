@@ -64,13 +64,13 @@ export function Whatsapp() {
       viewBox="-40.04 -40.04 388.08 388.08"
       // xml:space="preserve"
       stroke="#ffffff"
-      stroke-width="0.0030800000000000003"
+      strokeWidth="0.0030800000000000003"
     >
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       ></g>
       <g id="SVGRepo_iconCarrier">
         {" "}
