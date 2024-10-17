@@ -107,7 +107,7 @@ export default function LandingPage() {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
-  }, []);
+  });
 
   useEffect(() => {
     const marquee = document.getElementById("university-marquee");
@@ -235,12 +235,12 @@ export default function LandingPage() {
                   Comprehensive Visa Assistance
                 </h2>
                 <p className="max-w-[600px] text-zinc-500 md:text-md/relaxed lg:text-base/relaxed xl:text-md/relaxed">
-                  We understand that the visa process can be daunting. That's
-                  why our dedicated team provides comprehensive support
-                  throughout your visa application journey. From document
-                  preparation to interview coaching, we're with you every step
-                  of the way until you're ready to embark on your study abroad
-                  adventure.
+                  We understand that the visa process can be daunting.
+                  That&apos;s why our dedicated team provides comprehensive
+                  support throughout your visa application journey. From
+                  document preparation to interview coaching, we&apos;re with
+                  you every step of the way until you&apos;re ready to embark on
+                  your study abroad adventure.
                 </p>
               </div>
               <div className="flex justify-center lg:order-first">
@@ -317,7 +317,7 @@ export default function LandingPage() {
                 <Card className="bg-white">
                   <CardContent className="p-6">
                     <p className="mb-4 italic">
-                      "{testimonials[currentSlide].quote}"
+                      &quot;{testimonials[currentSlide].quote}&quot;
                     </p>
                     <p className="font-semibold">
                       {testimonials[currentSlide].name}
