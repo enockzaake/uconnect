@@ -9,36 +9,75 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      applications: {
+      chosen_programs: {
         Row: {
-          id: string | null
-          user_id: string | null
+          created_at: string | null
+          id: string
+          program_id: string
+          status: string | null
+          user_id: string
         }
         Insert: {
-          id?: string | null
-          user_id?: string | null
+          created_at?: string | null
+          id?: string
+          program_id: string
+          status?: string | null
+          user_id: string
         }
         Update: {
-          id?: string | null
-          user_id?: string | null
+          created_at?: string | null
+          id?: string
+          program_id?: string
+          status?: string | null
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "chosen_programs_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chosen_programs_user_id_fkey1"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
-      appplication_programs: {
+      events: {
         Row: {
-          application_id: string | null
-          id: string | null
-          program_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          image: string | null
+          start_date: string | null
+          status: string
+          title: string | null
+          venue: string | null
         }
         Insert: {
-          application_id?: string | null
-          id?: string | null
-          program_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image?: string | null
+          start_date?: string | null
+          status?: string
+          title?: string | null
+          venue?: string | null
         }
         Update: {
-          application_id?: string | null
-          id?: string | null
-          program_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image?: string | null
+          start_date?: string | null
+          status?: string
+          title?: string | null
+          venue?: string | null
         }
         Relationships: []
       }
@@ -86,6 +125,7 @@ export type Database = {
           personal_statement: string | null
           photo: string | null
           ple_file: string | null
+          progress: number
           referee_1_address: string | null
           referee_1_capacity_known: string | null
           referee_1_email_address: string | null
@@ -154,6 +194,7 @@ export type Database = {
           personal_statement?: string | null
           photo?: string | null
           ple_file?: string | null
+          progress?: number
           referee_1_address?: string | null
           referee_1_capacity_known?: string | null
           referee_1_email_address?: string | null
@@ -222,6 +263,7 @@ export type Database = {
           personal_statement?: string | null
           photo?: string | null
           ple_file?: string | null
+          progress?: number
           referee_1_address?: string | null
           referee_1_capacity_known?: string | null
           referee_1_email_address?: string | null
@@ -247,28 +289,50 @@ export type Database = {
           uce_file?: string | null
           working_hours?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       programs: {
         Row: {
-          id: string | null
+          country: string
+          created_at: string | null
+          description: string | null
+          duration: string | null
+          fulltime: boolean | null
+          id: string
+          image: string | null
+          institution: string | null
+          level: Database["public"]["Enums"]["education_level"]
+          logo: string | null
           name: string | null
+          updated_at: string | null
         }
         Insert: {
-          id?: string | null
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          duration?: string | null
+          fulltime?: boolean | null
+          id?: string
+          image?: string | null
+          institution?: string | null
+          level?: Database["public"]["Enums"]["education_level"]
+          logo?: string | null
           name?: string | null
+          updated_at?: string | null
         }
         Update: {
-          id?: string | null
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          duration?: string | null
+          fulltime?: boolean | null
+          id?: string
+          image?: string | null
+          institution?: string | null
+          level?: Database["public"]["Enums"]["education_level"]
+          logo?: string | null
           name?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -277,10 +341,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_by_email: {
+        Args: {
+          email: string
+        }
+        Returns: {
+          id: string
+          raw_app_meta_data: Json
+        }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      education_level: "bachelors" | "masters" | "phd"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -368,4 +440,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never

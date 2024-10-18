@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Menu, X, LogOut } from "lucide-react";
@@ -15,15 +14,18 @@ const SidebarItem = ({
   label,
   href,
   active,
+  toggleSideBar,
 }: {
   icon: React.ReactNode;
   label: string;
   href: string;
   active: boolean;
+  toggleSideBar: () => void;
 }) => {
   return (
     <Link href={href}>
       <Button
+        onClick={toggleSideBar}
         variant="ghost"
         className={`w-full justify-start hover:bg-gray-200 ${
           active ? "bg-gray-200 hover:bg-gray-300" : ""
@@ -38,13 +40,12 @@ const SidebarItem = ({
 
 export default function Sidebar() {
   const { toggleSideBar, sidebarOpen } = useSideBar();
-  // const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
 
   return (
     <>
       <aside
-        className={`bg-gray-100 w-64 min-h-screen p-4 fixed left-0 top-0 z-40 transition-transform duration-300 ease-in-out ${
+        className={`bg-gray-100  w-full md:w-64 min-h-screen p-4 fixed left-0 top-0 z-40 transition-transform duration-200 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:static`}
       >
@@ -65,6 +66,7 @@ export default function Sidebar() {
               icon={item.icon}
               label={item.label}
               href={item.href}
+              toggleSideBar={toggleSideBar}
             />
           ))}
         </nav>

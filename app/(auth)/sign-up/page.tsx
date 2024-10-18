@@ -16,6 +16,10 @@ import { useState } from "react";
 import { isValidEmail } from "@/lib/utils";
 import { Spinner } from "@/components/Loaders";
 import { Check, CircleCheckBig, Eye } from "lucide-react";
+import {
+  MultiCountrySelect,
+  MultiStudyProgramSelect,
+} from "@/components/selectComponents";
 
 export default function SIgnUp() {
   const [validEmail, setIsValidEmail] = useState(true);
@@ -26,9 +30,11 @@ export default function SIgnUp() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ email: "", password1: "", password2: "" });
 
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   async function handleSubmit() {
     setLoading(true);
-
+    return;
     try {
       setError(null);
       setIsValidEmail(true);
@@ -66,7 +72,7 @@ export default function SIgnUp() {
   }
 
   return (
-    <Card className="mx-auto max-w-sm mt-32">
+    <Card className="mx-auto max-w-sm mt-16">
       <CardHeader>
         <CardTitle className="text-xl">Sign Up</CardTitle>
         <CardDescription>
@@ -110,6 +116,14 @@ export default function SIgnUp() {
                 Invalid email address
               </Label>
             )}
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Choose desired countries</Label>
+            <MultiCountrySelect setSelected={setSelectedCountries} />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="password">Choose desired program </Label>
+            <MultiStudyProgramSelect setSelected={setSelectedCategories} />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>

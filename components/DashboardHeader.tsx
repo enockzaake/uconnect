@@ -5,6 +5,7 @@ import { ArrowLeft, Menu, X } from "lucide-react";
 import { useSideBar } from "@/store";
 import { NewEvent, NewProgram } from "./ActionBUttons";
 import { useRouter } from "next/navigation";
+import { Separator } from "./ui/separator";
 
 const DashboardHeader = ({
   title,

@@ -8,7 +8,6 @@ export async function uploadFile(file: File) {
   const response = await supabase.storage.from("documents").upload(path, file, {
     upsert: false,
   });
-
   if (!response.error) {
     const { data } = supabase.storage.from("documents").getPublicUrl(path);
     if (data.publicUrl) {

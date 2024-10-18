@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, useRef } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -23,7 +24,7 @@ import {
 } from "@/components/ui/select";
 
 import { toast } from "sonner";
-import { CirclePlus } from "lucide-react";
+import { CirclePlus, EllipsisVertical } from "lucide-react";
 
 import { addProgram, removeProgram, SubmitApplication } from "@/actions/user";
 import { newEvent, newProgram, updateEvent } from "@/actions/admin";
@@ -32,12 +33,19 @@ import { Separator } from "./ui/separator";
 
 import { Spinner } from "./Loaders";
 import Image from "next/image";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 export function AddChosenProgramButton({ programID }: { programID: string }) {
   const [loading, setLoading] = useState(false);
 
   async function handleAddProgram() {
     setLoading(true);
+    if (programID.length === 0) {
+      toast.error("Invalid program");
+      setLoading(false);
+      return;
+    }
+
     const { error } = await addProgram(programID);
     if (error) {
       toast.error(error);
@@ -55,20 +63,24 @@ export function AddChosenProgramButton({ programID }: { programID: string }) {
     </Button>
   );
 }
+
 export function RemoveChosenProgramButton({
   programID,
 }: {
   programID: string;
 }) {
   const [loading, setLoading] = useState(false);
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
   async function handleRemoveProgram() {
     if (!programID) {
-      toast.error("Invalid program");
+      toast.error("Invalid program id");
       setLoading(false);
       return;
     }
+
     setLoading(true);
+
     const { error } = await removeProgram(programID);
     if (error) {
       toast.error(error);
@@ -79,24 +91,55 @@ export function RemoveChosenProgramButton({
     toast.success("Program removed from application list");
     // Invalid the list and refresh
     setLoading(false);
+    closeBtnRef.current?.click();
   }
 
   return (
-    <Button
-      disabled={loading}
-      className="bg-red-500 mt-1"
-      onClick={handleRemoveProgram}
-    >
-      {loading ? <Spinner /> : "Remove"}
-    </Button>
+    <Dialog>
+      <DialogTrigger asChild>
+        <EllipsisVertical className="hover:cursor-pointer" />
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Remove program</DialogTitle>
+          <DialogDescription className="text-sm">
+            This program will be removed from the chosen application programs.
+          </DialogDescription>
+        </DialogHeader>
+
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button ref={closeBtnRef} type="button" variant="outline">
+              Cancel
+            </Button>
+          </DialogClose>
+          <Button
+            disabled={loading}
+            onClick={handleRemoveProgram}
+            className="bg-red-500"
+            type="submit"
+          >
+            {loading ? <Spinner /> : "Remove"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 
-export function SubmitApplicationButton() {
+export function SubmitApplicationButton({ progress }: { progress: number }) {
   const [loading, setLoading] = useState(false);
 
   async function handleSubmitApplication() {
     setLoading(true);
+    if (progress < 100) {
+      toast.info(
+        "Please provide all required profile information to submit application"
+      );
+      setLoading(false);
+      return;
+    }
+
     const { error } = await SubmitApplication();
 
     if (error) {
@@ -110,7 +153,12 @@ export function SubmitApplicationButton() {
   }
 
   return (
-    <Button className="bg-green-500 mt-1" onClick={handleSubmitApplication}>
+    <Button
+      variant="outline"
+      disabled={loading}
+      className="bg-green-500 mt-1"
+      onClick={handleSubmitApplication}
+    >
       {loading ? <Spinner /> : "Submit"}
     </Button>
   );

@@ -39,8 +39,8 @@ export const updateSession = async (request: NextRequest) => {
     // https://supabase.com/docs/guides/auth/server-side/nextjs
     const user = await supabase.auth.getUser();
 
-    const PROTECTED_USER_ROUTES = ["/dashboard", "/find-programs", "/profile"];
-    const AUTH_ROUTES = ["/login", "/sign-up"];
+    const PROTECTED_USER_ROUTES: string[] = []; //["/dashboard", "/find-programs", "/profile"];
+    const AUTH_ROUTES: string[] = ["/login", "/sign-up"];
 
     if (
       PROTECTED_USER_ROUTES.includes(request.nextUrl.pathname) &&

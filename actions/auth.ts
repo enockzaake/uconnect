@@ -21,6 +21,11 @@ export const signUpAction = async (email: string, password: string) => {
     password,
     options: {
       // emailRedirectTo: `${origin}/auth/callback`,
+      data: {
+        countries: [],
+        programs: [],
+        level: "",
+      },
     },
   });
 
@@ -184,4 +189,4 @@ const x = {
   countries: ["usa", "canada"],
   programs: ["software engineering", "mechanical"],
   level: "bachelors",
-}
+};

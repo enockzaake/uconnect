@@ -4,7 +4,6 @@ import { Database } from "./database";
 
 export interface StudentProfile {
   id: number;
-  user_id: number;
   title: string;
   first_name: string;
   last_name: string;
@@ -70,6 +69,7 @@ export interface StudentProfile {
   referee_2_email_address: string;
   referee_2_capacity_known: string;
   referee_2_reference_file: string;
+  progress: number;
 }
 
 export interface SidebarLink {
@@ -79,3 +79,13 @@ export interface SidebarLink {
 }
 
 export type TypedSupabaseClient = SupabaseClient<Database>;
+
+export type Section =
+  | "personal"
+  | "academic"
+  | "contact"
+  | "additional"
+  | "employment"
+  | "referees";
+
+// npx supabase gen types --lang=typescript --project-id jvrukztjlmzrqqkxmnof --schema public > types/database.ts

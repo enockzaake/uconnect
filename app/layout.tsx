@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <ReactQueryClientProvider>
       <html lang="en">
-        <Toaster position="top-center" richColors />
+        <Toaster position="top-center" richColors closeButton />
         <body className="">{children}</body>
       </html>
     </ReactQueryClientProvider>

@@ -20,6 +20,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.bestchoiceschools.com",
       },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
     ],
   },
 };

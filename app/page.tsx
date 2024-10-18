@@ -141,7 +141,7 @@ export default function LandingPage() {
                 src={slide.image}
                 alt={slide.title}
                 fill
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
                 priority={index === 0}
               />
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">

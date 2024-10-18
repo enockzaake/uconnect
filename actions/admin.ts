@@ -82,8 +82,12 @@ export async function newProgram(form: FormData | any): Promise<any> {
       fulltime: fulltime,
       description: description,
       image: imageURL,
+      country: "",
+      logo: "",
     };
-    const res = await supabase.from("programs").insert(data);
+
+    // @ts-ignore
+    const res = await supabase.from("programs").insert([data]).select();
 
     return { error: res.error?.message };
   } catch (error: any) {
