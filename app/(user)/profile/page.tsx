@@ -7,9 +7,13 @@ export default async function Profile() {
   const { data } = await getUserProfile();
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      {/* @ts-ignore */}
-      <StudentProfileForm profile={data} />
-    </Suspense>
+    <>
+      <h1 className="text-2xl font-bold mb-4">Student Profile</h1>
+
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* @ts-ignore */}
+        <StudentProfileForm profile={data} />
+      </Suspense>
+    </>
   );
 }

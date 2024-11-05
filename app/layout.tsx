@@ -14,11 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ReactQueryClientProvider>
-      <html lang="en">
-        <Toaster position="top-center" richColors closeButton />
-        <body className="">{children}</body>
-      </html>
-    </ReactQueryClientProvider>
+    <html lang="en">
+      <Toaster position="top-center" richColors closeButton />
+      <body className="">
+        <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+      </body>
+    </html>
   );
 }

@@ -132,13 +132,16 @@ export function SubmitApplicationButton({ progress }: { progress: number }) {
 
   async function handleSubmitApplication() {
     setLoading(true);
-    if (progress < 100) {
-      toast.info(
-        "Please provide all required profile information to submit application"
-      );
-      setLoading(false);
-      return;
-    }
+    // if (progress < 100) {
+    //   toast.info(
+    //     "Please provide all required profile information to submit application"
+    //   );
+    //   setLoading(false);
+    //   return;
+    // }
+
+    toast.success("Appliciation submitted succcessfully.");
+    setLoading(false);
 
     const { error } = await SubmitApplication();
 

@@ -26,7 +26,7 @@ export default function TestComponent() {
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#522258]">
           Seamless document upload to the cloud
         </h2>
-        <h3 className=" text-zinc-500 text-center">
+        <h3 className=" text-zinc-000 text-center">
           Uplaod all your required documents seamless from the comfort of your
           home and let us take care of the rest.
         </h3>

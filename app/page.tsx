@@ -162,19 +162,8 @@ export default function LandingPage() {
               </div>
             </div>
           ))}
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-            {heroSlides.map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full ${
-                  index === currentHeroSlide
-                    ? "bg-[#522258]"
-                    : "bg-white bg-opacity-50"
-                }`}
-                onClick={() => setCurrentHeroSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+
+          <div className=" left-0 right-0 flex justify-center space-x-4">
             <Button
               variant="outline"
               size="icon"
@@ -200,6 +189,20 @@ export default function LandingPage() {
               <span className="sr-only">Next slide</span>
             </Button>
           </div>
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+            {heroSlides.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full ${
+                  index === currentHeroSlide
+                    ? "bg-[#522258]"
+                    : "bg-white bg-opacity-50"
+                }`}
+                onClick={() => setCurrentHeroSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </section>
 
         <section className="w-full py-6">
@@ -208,7 +211,7 @@ export default function LandingPage() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-[#522258]">
                 Your personalized dashboard
               </h2>
-              <p className="max-w-[1200px] text-zinc-500">
+              <p className="max-w-[1200px] text-zinc-900">
                 Experience our user-friendly platform that makes planning your
                 study abroad journey a breeze.
               </p>
@@ -234,7 +237,7 @@ export default function LandingPage() {
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#522258]">
                   Comprehensive Visa Assistance
                 </h2>
-                <p className="max-w-[600px] text-zinc-500 md:text-md/relaxed lg:text-base/relaxed xl:text-md/relaxed">
+                <p className="max-w-[600px] text-zinc-900 md:text-md/relaxed lg:text-base/relaxed xl:text-md/relaxed">
                   We understand that the visa process can be daunting.
                   That&apos;s why our dedicated team provides comprehensive
                   support throughout your visa application journey. From
@@ -263,7 +266,7 @@ export default function LandingPage() {
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-[#522258]">
                   Popular Destinations
                 </h2>
-                <p className="max-w-[900px] text-zinc-500 md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
+                <p className="max-w-[900px] text-zinc-900 md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
                   Discover some of our most sought-after study abroad locations
                   around the world.
                 </p>
@@ -306,7 +309,7 @@ export default function LandingPage() {
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-[#522258]">
                   Student Testimonials
                 </h2>
-                <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[900px] text-zinc-900 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Hear from students who have transformed their lives through
                   our study abroad programs.
                 </p>
@@ -322,7 +325,7 @@ export default function LandingPage() {
                     <p className="font-semibold">
                       {testimonials[currentSlide].name}
                     </p>
-                    <p className="text-sm text-zinc-500">
+                    <p className="text-sm text-zinc-900">
                       {testimonials[currentSlide].program}
                     </p>
                   </CardContent>
@@ -356,7 +359,7 @@ export default function LandingPage() {
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-[#522258]">
                   Why U-CONNECT?
                 </h2>
-                <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="max-w-[900px] text-zinc-900 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   We offer unparalleled support and opportunities for students
                   seeking to broaden their horizons through international
                   education.
@@ -368,7 +371,7 @@ export default function LandingPage() {
                 <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
                   <GraduationCap className="h-12 w-12 text-[#522258]" />
                   <h3 className="text-xl font-bold">Expert Guidance</h3>
-                  <p className="text-zinc-500">
+                  <p className="text-zinc-900">
                     Our experienced advisors provide personalized support
                     throughout your study abroad journey.
                   </p>
@@ -378,7 +381,7 @@ export default function LandingPage() {
                 <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
                   <Globe2 className="h-12 w-12 text-[#522258]" />
                   <h3 className="text-xl font-bold">Global Network</h3>
-                  <p className="text-zinc-500">
+                  <p className="text-zinc-900">
                     Access to a wide range of prestigious universities and
                     programs across the globe.
                   </p>
@@ -388,7 +391,7 @@ export default function LandingPage() {
                 <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
                   <Users className="h-12 w-12 text-[#522258]" />
                   <h3 className="text-xl font-bold">Cultural Immersion</h3>
-                  <p className="text-zinc-500">
+                  <p className="text-zinc-900">
                     Immerse yourself in new cultures and gain a global
                     perspective that will benefit your future career.
                   </p>
@@ -440,7 +443,7 @@ export default function LandingPage() {
         </section>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-red-100">
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-zinc-900">
           © 2024 U-CONNECT. All rights reserved.
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">

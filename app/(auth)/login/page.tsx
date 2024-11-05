@@ -120,6 +120,7 @@ export default function LoginForm() {
             )}
           </div>
           <Button
+            disabled={loading}
             onClick={handleSubmit}
             type="submit"
             className="w-full bg-[#522258] hover:bg-[#703577]"

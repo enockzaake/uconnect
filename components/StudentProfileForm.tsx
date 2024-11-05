@@ -800,7 +800,6 @@ export default function StudentProfileForm({
 
   return (
     <div className="container mx-auto p-4 space-y-8 h-screen flex flex-col">
-      <h1 className="text-2xl font-bold mb-4">Student Profile</h1>
       <div className="flex flex-wrap gap-2 mb-4">
         <Button
           variant={currentSection === "personal" ? "default" : "outline"}

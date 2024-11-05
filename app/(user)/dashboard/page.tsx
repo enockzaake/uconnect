@@ -100,7 +100,7 @@ export default async function StudentDashboard() {
     <ScrollArea>
       <div className="min-h-screen p-2 flex flex-col ">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4 md:mb-0">
+          <h1 className="text-3xl font-bold text-[#522258] mb-4 md:mb-0">
             Dashboard
           </h1>
           <Card className="w-full md:w-auto">
@@ -174,7 +174,7 @@ export default async function StudentDashboard() {
           </CardContent>
         </Card>
 
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+        <h2 className="text-2xl font-semibold mb-4 text-[#522258]">
           Your Applications
         </h2>
 
