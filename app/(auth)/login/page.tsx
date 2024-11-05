@@ -38,21 +38,21 @@ export default function LoginForm() {
 
     if (!data.email || !isValidEmail(data.email)) {
       setErrorMessages((prev) => ({ ...prev, emailRequired: true }));
-      setLoading(false); // Add this to stop loading when validation fails
+      setLoading(false);
       return;
     }
 
     if (!data.password) {
       setErrorMessages((prev) => ({ ...prev, passwordRequired: true }));
-      setLoading(false); // Add this to stop loading when validation fails
+      setLoading(false);
       return;
     }
 
     try {
-      const { error } = await signInAction(data.email, data.password);
-      if (error) {
-        setError(error);
-      } 
+      const res = await signInAction(data.email, data.password);
+      if (res?.error) {
+        setError(res?.error);
+      }
       router.push("/dashboard");
     } catch (error: any) {
       setError(error?.message || "An unknown error occurred");
@@ -62,7 +62,7 @@ export default function LoginForm() {
   }
 
   return (
-    <Card className="mx-auto max-w-sm mt-32">
+    <Card className="mx-4 sm:mx-auto max-w-sm mt-32">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
@@ -119,7 +119,11 @@ export default function LoginForm() {
               </Label>
             )}
           </div>
-          <Button onClick={handleSubmit} type="submit" className="w-full">
+          <Button
+            onClick={handleSubmit}
+            type="submit"
+            className="w-full bg-[#522258] hover:bg-[#703577]"
+          >
             {loading ? <Spinner /> : "Login"}
           </Button>
         </div>

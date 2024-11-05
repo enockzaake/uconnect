@@ -72,9 +72,9 @@ export const signInAction = async (email: string, password: string) => {
     return { error: error.message };
   }
 
-  return { error: null };
+  // return { error: null };
 
-  // redirect("/dashboard");
+  redirect("/dashboard");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {

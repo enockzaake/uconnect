@@ -150,7 +150,11 @@ export default function SIgnUp() {
               </Label>
             )}
           </div>
-          <Button disabled={loading} onClick={handleSubmit} className="w-full">
+          <Button
+            disabled={loading}
+            onClick={handleSubmit}
+            className="w-full bg-[#522258] hover:bg-[#703577]"
+          >
             {loading ? <Spinner /> : "Create an account"}
           </Button>
         </div>

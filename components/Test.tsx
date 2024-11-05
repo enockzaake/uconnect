@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { CloudUpload } from "lucide-react";
 import { Progress } from "./ui/progress";
 
@@ -23,7 +23,7 @@ export default function TestComponent() {
   return (
     <section className="w-full text-center pt-12">
       <div className="flex flex-col space-y-1">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-red-700">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#522258]">
           Seamless document upload to the cloud
         </h2>
         <h3 className=" text-zinc-500 text-center">

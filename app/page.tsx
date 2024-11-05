@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Globe2,
   GraduationCap,
@@ -155,7 +154,7 @@ export default function LandingPage() {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-red-700 hover:bg-red-800 text-white"
+                    className="bg-[#522258] hover:bg-[#522258] text-white"
                   >
                     <Link href={"/find-programs"}>Explore Programs</Link>
                   </Button>
@@ -169,7 +168,7 @@ export default function LandingPage() {
                 key={index}
                 className={`w-3 h-3 rounded-full ${
                   index === currentHeroSlide
-                    ? "bg-red-700"
+                    ? "bg-[#522258]"
                     : "bg-white bg-opacity-50"
                 }`}
                 onClick={() => setCurrentHeroSlide(index)}
@@ -179,7 +178,7 @@ export default function LandingPage() {
             <Button
               variant="outline"
               size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white text-[#522258] hover:bg-red-50 hover:text-[#522258]"
               onClick={() =>
                 setCurrentHeroSlide(
                   (prev) => (prev - 1 + heroSlides.length) % heroSlides.length
@@ -192,7 +191,7 @@ export default function LandingPage() {
             <Button
               variant="outline"
               size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-[#522258] hover:bg-red-50 hover:text-[#522258]"
               onClick={() =>
                 setCurrentHeroSlide((prev) => (prev + 1) % heroSlides.length)
               }
@@ -206,7 +205,7 @@ export default function LandingPage() {
         <section className="w-full py-6">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-red-700">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-[#522258]">
                 Your personalized dashboard
               </h2>
               <p className="max-w-[1200px] text-zinc-500">
@@ -232,7 +231,7 @@ export default function LandingPage() {
           <div className="container px-4 md:px-24">
             <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-red-700">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-[#522258]">
                   Comprehensive Visa Assistance
                 </h2>
                 <p className="max-w-[600px] text-zinc-500 md:text-md/relaxed lg:text-base/relaxed xl:text-md/relaxed">
@@ -261,7 +260,7 @@ export default function LandingPage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-red-600">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-[#522258]">
                   Popular Destinations
                 </h2>
                 <p className="max-w-[900px] text-zinc-500 md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed">
@@ -304,7 +303,7 @@ export default function LandingPage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-red-700">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-[#522258]">
                   Student Testimonials
                 </h2>
                 <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -331,7 +330,7 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white text-[#522258] hover:bg-red-50 hover:text-[#522258]"
                   onClick={prevSlide}
                 >
                   <ChevronLeft className="h-4 w-4" />
@@ -340,7 +339,7 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white text-red-700 hover:bg-red-50 hover:text-red-800"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white text-[#522258] hover:bg-red-50 hover:text-[#522258]"
                   onClick={nextSlide}
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -354,7 +353,7 @@ export default function LandingPage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-red-700">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-[#522258]">
                   Why U-CONNECT?
                 </h2>
                 <p className="max-w-[900px] text-zinc-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -367,7 +366,7 @@ export default function LandingPage() {
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
               <Card className="bg-white">
                 <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
-                  <GraduationCap className="h-12 w-12 text-red-700" />
+                  <GraduationCap className="h-12 w-12 text-[#522258]" />
                   <h3 className="text-xl font-bold">Expert Guidance</h3>
                   <p className="text-zinc-500">
                     Our experienced advisors provide personalized support
@@ -377,7 +376,7 @@ export default function LandingPage() {
               </Card>
               <Card className="bg-white">
                 <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
-                  <Globe2 className="h-12 w-12 text-red-700" />
+                  <Globe2 className="h-12 w-12 text-[#522258]" />
                   <h3 className="text-xl font-bold">Global Network</h3>
                   <p className="text-zinc-500">
                     Access to a wide range of prestigious universities and
@@ -387,7 +386,7 @@ export default function LandingPage() {
               </Card>
               <Card className="bg-white">
                 <CardContent className="flex flex-col items-center space-y-4 text-center p-6">
-                  <Users className="h-12 w-12 text-red-700" />
+                  <Users className="h-12 w-12 text-[#522258]" />
                   <h3 className="text-xl font-bold">Cultural Immersion</h3>
                   <p className="text-zinc-500">
                     Immerse yourself in new cultures and gain a global
@@ -399,7 +398,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="w-full py-12 bg-red-700">
+        <section className="w-full py-12 bg-[#522258]">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -414,13 +413,13 @@ export default function LandingPage() {
               <div className="w-full max-w-sm space-y-2">
                 <form className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Input
-                    className="max-w-lg flex-1 bg-white text-red-700 placeholder-red-400"
+                    className="max-w-lg flex-1 bg-white text-[#522258] placeholder-red-400"
                     placeholder="Enter your email"
                     type="email"
                   />
                   <Button
                     type="submit"
-                    className="bg-white text-red-700 hover:bg-red-50"
+                    className="bg-white text-[#522258] hover:bg-red-50"
                   >
                     Get Started
                   </Button>
@@ -446,13 +445,13 @@ export default function LandingPage() {
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link
-            className="text-xs hover:underline underline-offset-4 text-red-700"
+            className="text-xs hover:underline underline-offset-4 text-[#522258]"
             href="#"
           >
             Terms of Service
           </Link>
           <Link
-            className="text-xs hover:underline underline-offset-4 text-red-700"
+            className="text-xs hover:underline underline-offset-4 text-[#522258]"
             href="#"
           >
             Privacy
